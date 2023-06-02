@@ -6,9 +6,11 @@ import { useQuery } from '@tanstack/react-query'
 import { Box, Button, Text } from '@chakra-ui/react'
 import moment from 'moment'
 import ImageGallery from 'react-image-gallery'
+import { useBasket } from '../../contexts/BasketContext'
 
 function ProductDetail() {
     const { product_id } = useParams()
+    const { addToBasket, items } = useBasket()
 
     const { isLoading, error, data } = useQuery({
         queryKey: ['product', product_id],
@@ -23,11 +25,16 @@ function ProductDetail() {
         return <div>Error....</div>
     }
 
-    const images = data.photos.map((url)=>({original:url}))
-    console.log(process.env.REACT_APP_BASE_ENDPOINT)
+    const images = data.photos.map((url) => ({ original: url }))
+
+    const findBasketItem = items.find((item) => item._id === product_id)
+
     return (
         <div>
-            <Button colorScheme='pink'>Add to Basket</Button>
+            <Button colorScheme={findBasketItem?"pink":'green'} onClick={() => addToBasket(data, findBasketItem)}>
+                {findBasketItem ? "Remove from basket" : "Add to Basket"}
+                
+            </Button>
 
             <Text as='h2' fontSize='2xl'>{data.title}</Text>
 

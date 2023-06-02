@@ -1,0 +1,30 @@
+import { createContext, useContext, useState } from "react";
+
+const BasketContext = createContext()
+
+const BasketProvider = ({ children }) => {
+    const [items, setItems] = useState([])
+
+    const addToBasket = (data, findBasketItem) => {
+        if (!findBasketItem) { //Ürün sepete eklenmemişse ekler.
+            return setItems((items) => [data, ...items])
+        }
+        //Ürün zaten eklenmişse çıkarır.
+        const filtered = items.filter((item) => item._id !== findBasketItem._id)
+        setItems(filtered)
+
+    }
+
+    const values = {
+        items,
+        setItems,
+        addToBasket
+    }
+
+    return <BasketContext.Provider value={values}>{children}</BasketContext.Provider>
+}
+
+
+const useBasket = () => useContext(BasketContext)
+
+export { BasketProvider, useBasket }

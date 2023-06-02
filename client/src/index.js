@@ -10,6 +10,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 //contexts
 import { AuthProvider } from './contexts/AuthContext';
+import { BasketProvider } from './contexts/BasketContext';
 
 
 
@@ -24,7 +25,9 @@ root.render(
       <ReactQueryDevtools initialIsOpen={false} />
       <ChakraProvider>
         <AuthProvider>
+          <BasketProvider>
           <App />
+          </BasketProvider>
         </AuthProvider>
       </ChakraProvider>
     </QueryClientProvider>

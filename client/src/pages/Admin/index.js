@@ -1,11 +1,10 @@
 import React from 'react'
 import './styles.css'
-import { Link, Outlet, Route, Routes, useLocation, useMatch } from 'react-router-dom'
+import { Link, Outlet} from 'react-router-dom'
  
 
 function Admin() {
-    const {pathname} = useLocation
-    console.log(pathname)
+
     return (
         <div>
             <nav>

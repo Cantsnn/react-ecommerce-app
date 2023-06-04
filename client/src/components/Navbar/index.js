@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import { useBasket } from '../../contexts/BasketContext'
 
 function Navbar() {
-    const { loggedIn } = useAuth()
+    const { loggedIn, user } = useAuth()
 
     const { items } = useBasket()
 
@@ -46,6 +46,14 @@ function Navbar() {
                             items.length > 0 &&(
                             <Link to='/basket'>
                                 <Button colorScheme='pink' variant={'outline'}>Basket ({items.length})</Button>
+
+                            </Link>
+                            )
+                        }
+                        {
+                            user?.role === 'admin' &&(
+                                <Link to='/admin'>
+                                <Button colorScheme='pink' variant={'ghost'}>Admin</Button>
 
                             </Link>
                             )

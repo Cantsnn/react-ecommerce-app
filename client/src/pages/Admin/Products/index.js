@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
 import { deleteProduct, fetchProductList } from '../../../api'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import {  Button, Text } from '@chakra-ui/react'
-import {  Popconfirm, Table } from 'antd'
+import { Button, Flex, Text } from '@chakra-ui/react'
+import { Popconfirm, Table } from 'antd'
 import { Link } from 'react-router-dom'
 function AdminProducts() {
   const { isLoading, error, data } = useQuery({
@@ -13,14 +13,14 @@ function AdminProducts() {
 
   const queryCilent = useQueryClient()
 
-  const deleteMutation = useMutation(deleteProduct,{
-    onSuccess: ()=> queryCilent.invalidateQueries('admin:products')
+  const deleteMutation = useMutation(deleteProduct, {
+    onSuccess: () => queryCilent.invalidateQueries('admin:products')
   })
 
-  const handleDelete = (product_id)=>{
+  const handleDelete = (product_id) => {
     deleteMutation.mutate(product_id)
     alert("The product was successfully deleted")
-    
+
   }
 
   const columns = useMemo(() => {
@@ -51,7 +51,7 @@ function AdminProducts() {
             </Link>
             <Popconfirm
               title="Are you sure?"
-              onConfirm={()=>handleDelete(record._id)}
+              onConfirm={() => handleDelete(record._id)}
               onCancel={() => console.log('İptal Edildi')}
               okText='Yes'
               cancelText='No'
@@ -78,11 +78,15 @@ function AdminProducts() {
   }
 
 
-
-  console.log(data)
   return (
     <div>
-      <Text fontSize={'2xl'} p={'5'}></Text>
+      <Flex justifyContent={'space-between'} alignItems={'center'}>
+        <Text fontSize={'2xl'} p={'5'}>Products</Text>
+        <Link to={'/admin/products/new'}>
+          <Button colorScheme='green'>New</Button>
+
+        </Link>
+      </Flex>
       <Table dataSource={data} columns={columns} rowKey={'_id'} />
     </div>
   )

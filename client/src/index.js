@@ -17,7 +17,14 @@ import { BasketProvider } from './contexts/BasketContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries:{
+      refetchOnMount: false,
+      refetchOnWindowFocus:false
+    }
+  }
+})
 
 root.render(
   <React.StrictMode>

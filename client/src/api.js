@@ -62,6 +62,15 @@ export const postOrder = async (input)=>{
 export const fetchOrders = async ()=>{
 
     const {data} = await axios.get(`${process.env.REACT_APP_BASE_ENDPOINT}/order`)
+    
+    return data
+
+}
+
+export const deleteProduct = async (product_id)=>{
+
+    const {data} = await axios.delete(`${process.env.REACT_APP_BASE_ENDPOINT}/product/${product_id}`)
+
     return data
 
 }

@@ -1,16 +1,16 @@
 import React, { useMemo } from 'react'
 import { deleteProduct, fetchProductList } from '../../../api'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { AlertTitle, Button, Text } from '@chakra-ui/react'
-import { Alert, Popconfirm, Table } from 'antd'
-import { Link, useNavigate } from 'react-router-dom'
+import {  Button, Text } from '@chakra-ui/react'
+import {  Popconfirm, Table } from 'antd'
+import { Link } from 'react-router-dom'
 function AdminProducts() {
   const { isLoading, error, data } = useQuery({
     queryKey: ['admin:products'],
     queryFn: fetchProductList
   })
 
-  const navigate = useNavigate();
+
   const queryCilent = useQueryClient()
 
   const deleteMutation = useMutation(deleteProduct,{
@@ -18,7 +18,6 @@ function AdminProducts() {
   })
 
   const handleDelete = (product_id)=>{
-    console.log(product_id)
     deleteMutation.mutate(product_id)
     alert("The product was successfully deleted")
     

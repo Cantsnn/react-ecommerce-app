@@ -32,11 +32,11 @@ function Basket() {
             items: JSON.stringify(itemdIds)
         }
 
-        const response = await postOrder(input)
+        await postOrder(input)
 
         emptyBasket()
         onClose()
-        console.log(response)
+
     }
 
     return (

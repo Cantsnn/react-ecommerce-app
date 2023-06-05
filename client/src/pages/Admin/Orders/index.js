@@ -18,7 +18,6 @@ function AdminOrders() {
     return <div>Error.... {error.message}</div>
   }
 
-  console.log(data)
   return (
     <div>
       <Text fontSize={'22'}>Orders </Text>

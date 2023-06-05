@@ -13,6 +13,7 @@ import Admin from './pages/Admin';
 import AdminHome from './pages/Admin/Home';
 import AdminOrders from './pages/Admin/Orders';
 import AdminProducts from './pages/Admin/Products';
+import AdminProductDetail from './pages/Admin/ProductDetail';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path=''   element={<ProtectedRoute admin={true}><AdminHome /></ProtectedRoute>} />
               <Route path='orders' element={<ProtectedRoute admin={true}><AdminOrders /></ProtectedRoute>} />
               <Route path='products' element={<ProtectedRoute admin={true}><AdminProducts /></ProtectedRoute>} />
+              <Route path='products/:product_id' element={<ProtectedRoute admin={true}><AdminProductDetail /></ProtectedRoute>} />
 
             </Route>
 
